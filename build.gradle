@@ -114,6 +114,11 @@ tasks.register("validateSpelunkeryData") {
         assert !file("${resources}/data/spelunkery/overrides").exists(), "Dead dynamic override directory must stay deleted"
         assert file("${neoforgeResources}/data/spelunkery/neoforge/biome_modifier/crevice_carver.json").exists(), "Crevice carver modifier is missing"
 
+        fileTree("${resources}/data/create/recipe").matching { include "**/*.json" }.each { recipe ->
+            assert !recipe.text.contains("processingTime"), "Create recipe uses stale processingTime: ${recipe}"
+            assert !recipe.text.contains('"id": 0.8'), "Create recipe has an invalid numeric id: ${recipe}"
+        }
+
         ["andesite", "diorite", "granite", "tuff"].each { name ->
             def table = file("${resources}/data/spelunkery/loot_table/blocks/${name}_zinc_ore.json")
             assert table.exists(), "Missing zinc loot table: ${table}"
