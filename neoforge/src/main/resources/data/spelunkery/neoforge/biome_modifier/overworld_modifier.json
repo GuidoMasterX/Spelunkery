@@ -1,6 +1,6 @@
 {
   "type": "neoforge:add_features",
-  "biomes": "#minecraft:is_overworld",
+  "biomes": "#spelunkery:has_mores",
   "features": [
     "spelunkery:diamond_ore_lava",
     "spelunkery:ore_aquifer",

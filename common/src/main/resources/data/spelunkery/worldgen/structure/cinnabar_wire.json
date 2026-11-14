@@ -1,6 +1,6 @@
 {
   "type": "minecraft:jigsaw",
-  "biomes": "#minecraft:is_overworld",
+  "biomes": "#spelunkery:has_mores",
   "step": "underground_decoration",
   "spawn_overrides": {},
   "terrain_adaptation": "bury",

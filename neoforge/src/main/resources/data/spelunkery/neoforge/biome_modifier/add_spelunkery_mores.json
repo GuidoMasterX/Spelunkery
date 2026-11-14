@@ -1,0 +1,25 @@
+{
+    "step":  "underground_ores",
+    "features":  [
+                     "spelunkery:m_ore_coal_lower",
+                     "spelunkery:m_ore_coal_upper",
+                     "spelunkery:m_ore_copper",
+                     "spelunkery:m_ore_copper_large",
+                     "spelunkery:m_ore_diamond",
+                     "spelunkery:m_ore_diamond_buried",
+                     "spelunkery:m_ore_diamond_large",
+                     "spelunkery:m_ore_emerald",
+                     "spelunkery:m_ore_gold",
+                     "spelunkery:m_ore_gold_extra",
+                     "spelunkery:m_ore_gold_lower",
+                     "spelunkery:m_ore_iron_middle",
+                     "spelunkery:m_ore_iron_small",
+                     "spelunkery:m_ore_iron_upper",
+                     "spelunkery:m_ore_lapis",
+                     "spelunkery:m_ore_lapis_buried",
+                     "spelunkery:m_ore_redstone",
+                     "spelunkery:m_ore_redstone_lower"
+                 ],
+    "type":  "neoforge:add_features",
+    "biomes":  "#spelunkery:has_mores"
+}

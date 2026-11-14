@@ -1,8 +1,23 @@
 {
   "values": [
-    "#minecraft:redstone_ores",
-    "#minecraft:lapis_ores",
-    "#minecraft:emerald_ores",
-    "#minecraft:diamond_ores"
+    "spelunkery:granite_diamond_ore",
+    "spelunkery:andesite_diamond_ore",
+    "spelunkery:diorite_diamond_ore",
+    "spelunkery:tuff_diamond_ore",
+    "spelunkery:smooth_basalt_diamond_ore",
+    "spelunkery:granite_lapis_ore",
+    "spelunkery:andesite_lapis_ore",
+    "spelunkery:diorite_lapis_ore",
+    "spelunkery:tuff_lapis_ore",
+    "spelunkery:sandstone_lapis_ore",
+    "spelunkery:granite_emerald_ore",
+    "spelunkery:andesite_emerald_ore",
+    "spelunkery:diorite_emerald_ore",
+    "spelunkery:tuff_emerald_ore",
+    "spelunkery:granite_redstone_ore",
+    "spelunkery:andesite_redstone_ore",
+    "spelunkery:diorite_redstone_ore",
+    "spelunkery:tuff_redstone_ore",
+    "spelunkery:calcite_redstone_ore"
   ]
 }

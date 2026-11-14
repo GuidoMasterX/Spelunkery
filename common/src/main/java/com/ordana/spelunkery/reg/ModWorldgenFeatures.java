@@ -8,7 +8,6 @@ import com.ordana.spelunkery.worldgen.structures.MineshaftDustCorridor;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -83,19 +82,19 @@ public class ModWorldgenFeatures {
         SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.FLUID_SPRINGS, ModTags.HAS_SALT_NOISE, spring_water_spring);
 
         ResourceKey<PlacedFeature> ore_aquifer = ResourceKey.create(Registries.PLACED_FEATURE, Spelunkery.res("ore_aquifer"));
-        SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.UNDERGROUND_ORES, BiomeTags.IS_OVERWORLD, ore_aquifer);
+        SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.UNDERGROUND_ORES, ModTags.HAS_MORES, ore_aquifer);
 
         ResourceKey<PlacedFeature> diamond_ore_lava = ResourceKey.create(Registries.PLACED_FEATURE, Spelunkery.res("diamond_ore_lava"));
-        SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.UNDERGROUND_ORES, BiomeTags.IS_OVERWORLD, diamond_ore_lava);
+        SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.UNDERGROUND_ORES, ModTags.HAS_MORES, diamond_ore_lava);
 
         ResourceKey<PlacedFeature> nephrite_geode = ResourceKey.create(Registries.PLACED_FEATURE, Spelunkery.res("nephrite_geode"));
-        SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.UNDERGROUND_ORES, BiomeTags.IS_OVERWORLD, nephrite_geode);
+        SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.UNDERGROUND_ORES, ModTags.HAS_MORES, nephrite_geode);
 
         ResourceKey<PlacedFeature> magnetite_geode = ResourceKey.create(Registries.PLACED_FEATURE, Spelunkery.res("magnetite_geode"));
-        SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.UNDERGROUND_ORES, BiomeTags.IS_NETHER, magnetite_geode);
+        SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.UNDERGROUND_ORES, ModTags.HAS_NETHER_NOISE, magnetite_geode);
 
         ResourceKey<PlacedFeature> quartz_geode = ResourceKey.create(Registries.PLACED_FEATURE, Spelunkery.res("quartz_geode"));
-        SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.UNDERGROUND_ORES, BiomeTags.IS_NETHER, quartz_geode);
+        SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.UNDERGROUND_ORES, ModTags.HAS_NETHER_NOISE, quartz_geode);
 
         //veins
         ResourceKey<PlacedFeature> large_gold_vein = ResourceKey.create(Registries.PLACED_FEATURE, Spelunkery.res("large_gold_vein"));
@@ -113,7 +112,7 @@ public class ModWorldgenFeatures {
 
         //vegetation
         ResourceKey<PlacedFeature> tangle_roots_ceiling = ResourceKey.create(Registries.PLACED_FEATURE, Spelunkery.res("tangle_roots_ceiling"));
-        SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.VEGETAL_DECORATION, BiomeTags.IS_OVERWORLD, tangle_roots_ceiling);
+        SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.VEGETAL_DECORATION, ModTags.HAS_MORES, tangle_roots_ceiling);
 
         ResourceKey<PlacedFeature> deep_dark_fossil = ResourceKey.create(Registries.PLACED_FEATURE, Spelunkery.res("deep_dark_fossil"));
         SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.VEGETAL_DECORATION, ModTags.HAS_SCULK_NOISE, deep_dark_fossil);

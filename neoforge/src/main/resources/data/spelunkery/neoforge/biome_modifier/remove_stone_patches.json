@@ -1,0 +1,19 @@
+{
+    "steps":  [
+                  "underground_ores"
+              ],
+    "features":  [
+                     "minecraft:ore_andesite_upper",
+                     "minecraft:ore_andesite_lower",
+                     "minecraft:ore_granite_upper",
+                     "minecraft:ore_granite_lower",
+                     "minecraft:ore_diorite_upper",
+                     "minecraft:ore_diorite_lower",
+                     "minecraft:ore_tuff",
+                     "minecraft:ore_dirt",
+                     "minecraft:ore_gravel",
+                     "minecraft:ore_clay"
+                 ],
+    "type":  "neoforge:remove_features",
+    "biomes":  "#spelunkery:has_stone_noise"
+}

@@ -113,6 +113,15 @@ tasks.register("validateSpelunkeryData") {
         assert file("${resources}/data/create/recipe").exists(), "Create recipe directory is missing"
         assert !file("${resources}/data/spelunkery/overrides").exists(), "Dead dynamic override directory must stay deleted"
         assert file("${neoforgeResources}/data/spelunkery/neoforge/biome_modifier/crevice_carver.json").exists(), "Crevice carver modifier is missing"
+        assert !file("${resources}/data/minecraft/worldgen/configured_feature/ore_coal.json").exists(), "Global vanilla ore override must stay deleted"
+        assert !file("${resources}/data/minecraft/loot_table/blocks/diamond_ore.json").exists(), "Global vanilla ore loot override must stay deleted"
+        assert !file("${resources}/data/spelunkery/tags/block/xp_drop_disabled.json").text.contains("minecraft:redstone_ores"), "XP suppression must not include vanilla ore tags"
+        assert file("${resources}/data/spelunkery/worldgen/configured_feature/m_ore_coal.json").exists(), "Spelunkery m'ore configured feature is missing"
+        assert file("${resources}/data/spelunkery/worldgen/placed_feature/m_ore_coal_upper.json").exists(), "Spelunkery m'ore placed feature is missing"
+        assert file("${resources}/data/spelunkery/tags/worldgen/biome/has_mores.json").exists(), "Spelunkery m'ore biome tag is missing"
+        ["add_spelunkery_mores.json", "remove_vanilla_mores.json", "remove_stone_patches.json"].each { name ->
+            assert file("${neoforgeResources}/data/spelunkery/neoforge/biome_modifier/${name}").exists(), "Missing biome modifier: ${name}"
+        }
 
         fileTree("${resources}/data/create/recipe").matching { include "**/*.json" }.each { recipe ->
             def json = new groovy.json.JsonSlurper().parse(recipe)
