@@ -1,0 +1,8 @@
+{
+    "step":  "underground_ores",
+    "features":  [
+                     "spelunkery:m_ore_emerald"
+                 ],
+    "type":  "neoforge:add_features",
+    "biomes":  "#minecraft:is_mountain"
+}

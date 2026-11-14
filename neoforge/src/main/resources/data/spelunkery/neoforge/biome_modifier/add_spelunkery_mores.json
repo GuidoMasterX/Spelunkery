@@ -8,9 +8,7 @@
                      "spelunkery:m_ore_diamond",
                      "spelunkery:m_ore_diamond_buried",
                      "spelunkery:m_ore_diamond_large",
-                     "spelunkery:m_ore_emerald",
                      "spelunkery:m_ore_gold",
-                     "spelunkery:m_ore_gold_extra",
                      "spelunkery:m_ore_gold_lower",
                      "spelunkery:m_ore_iron_middle",
                      "spelunkery:m_ore_iron_small",
@@ -18,7 +16,8 @@
                      "spelunkery:m_ore_lapis",
                      "spelunkery:m_ore_lapis_buried",
                      "spelunkery:m_ore_redstone",
-                     "spelunkery:m_ore_redstone_lower"
+                     "spelunkery:m_ore_redstone_lower",
+                     "spelunkery:m_ore_diamond_medium"
                  ],
     "type":  "neoforge:add_features",
     "biomes":  "#spelunkery:has_mores"

@@ -29,6 +29,7 @@ public class SpelunkeryFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         Spelunkery.commonInit();
+        FabricBiomeModifications.register();
 
         ServerLifecycleEvents.SERVER_STARTING.register(s -> currentServer = s);
 
