@@ -9,7 +9,6 @@ import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -79,9 +78,9 @@ public final class FabricBiomeModifications {
         BiomeModifications.create(Spelunkery.res("worldgen_compat"))
                 .add(ModificationPhase.ADDITIONS, BiomeSelectors.tag(ModTags.HAS_MORES),
                         context -> addAll(context, M_ORES))
-                .add(ModificationPhase.ADDITIONS, BiomeSelectors.tag(BiomeTags.IS_MOUNTAIN),
+                .add(ModificationPhase.ADDITIONS, BiomeSelectors.tag(ModTags.HAS_SALT_NOISE),
                         context -> add(context, "spelunkery:m_ore_emerald"))
-                .add(ModificationPhase.ADDITIONS, BiomeSelectors.tag(BiomeTags.IS_BADLANDS),
+                .add(ModificationPhase.ADDITIONS, BiomeSelectors.tag(ModTags.HAS_BADLANDS),
                         context -> add(context, "spelunkery:m_ore_gold_extra"))
                 .add(ModificationPhase.REMOVALS, BiomeSelectors.tag(ModTags.HAS_MORES),
                         context -> removeAll(context, VANILLA_ORES))

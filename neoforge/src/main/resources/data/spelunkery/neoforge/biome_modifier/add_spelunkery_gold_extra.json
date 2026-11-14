@@ -4,5 +4,5 @@
                      "spelunkery:m_ore_gold_extra"
                  ],
     "type":  "neoforge:add_features",
-    "biomes":  "#minecraft:is_badlands"
+    "biomes":  "#spelunkery:has_badlands"
 }

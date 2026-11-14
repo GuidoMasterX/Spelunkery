@@ -57,6 +57,7 @@ public class ModTags {
     public static final TagKey<Biome> HAS_SWAMP_NOISE = registerBiomeTag("has_swamp_noise");
     public static final TagKey<Biome> HAS_NETHER_NOISE = registerBiomeTag("has_nether_noise");
     public static final TagKey<Biome> HAS_MORES = registerBiomeTag("has_mores");
+    public static final TagKey<Biome> HAS_BADLANDS = registerBiomeTag("has_badlands");
     public static final TagKey<Biome> HAS_END_NOISE = registerBiomeTag("has_end_noise");
     public static final TagKey<Biome> HAS_SULFUR_PATCHES = registerBiomeTag("has_sulfur_patches");
 
