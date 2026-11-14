@@ -104,3 +104,21 @@ allprojects {
         withSourcesJar()
     }
 }
+
+tasks.register("validateSpelunkeryData") {
+    doLast {
+        def resources = file("common/src/main/resources")
+        def neoforgeResources = file("neoforge/src/main/resources")
+        assert !file("${resources}/data/create/recipes").exists(), "Create recipes must use the singular recipe directory"
+        assert file("${resources}/data/create/recipe").exists(), "Create recipe directory is missing"
+        assert !file("${resources}/data/spelunkery/overrides").exists(), "Dead dynamic override directory must stay deleted"
+        assert file("${neoforgeResources}/data/spelunkery/neoforge/biome_modifier/crevice_carver.json").exists(), "Crevice carver modifier is missing"
+
+        ["andesite", "diorite", "granite", "tuff"].each { name ->
+            def table = file("${resources}/data/spelunkery/loot_table/blocks/${name}_zinc_ore.json")
+            assert table.exists(), "Missing zinc loot table: ${table}"
+            assert !table.text.contains('"name": "minecraft:stone"'), "Zinc ore must not drop stone: ${table}"
+            assert table.text.contains("create:raw_zinc"), "Zinc ore must drop raw zinc: ${table}"
+        }
+    }
+}

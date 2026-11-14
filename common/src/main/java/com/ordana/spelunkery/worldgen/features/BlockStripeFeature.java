@@ -87,7 +87,6 @@ public class BlockStripeFeature extends Feature<BlockStripeFeatureConfig> {
                     noise.DomainWarp(domainWarpedVector);
                     float cellValue = cellNoise.GetNoise(domainWarpedVector.x, domainWarpedVector.y, domainWarpedVector.z);
                     cellValue = (cellValue * 0.5F + 0.5F);
-                    int stoneIndex = Mth.floor((cellValue) * config.firstTargetPlacer.size());
 
                     float seed = cellValue * 1000000;
                     Random patchRandom = new Random((long) seed);
@@ -107,7 +106,8 @@ public class BlockStripeFeature extends Feature<BlockStripeFeatureConfig> {
                             else if (isTarget2) patternList = config.secondTargetPlacer;
 
 
-                            if (patternList != null) {
+                            if (patternList != null && !patternList.isEmpty()) {
+                                int stoneIndex = Math.min(Mth.floor(cellValue * patternList.size()), patternList.size() - 1);
                                 StoneEntry stoneEntry = patternList.get(stoneIndex);
                                 StonePattern stonePattern = stoneEntry.getStonePattern();
                                 float patternValue = stonePattern.getValue(currentPos);
