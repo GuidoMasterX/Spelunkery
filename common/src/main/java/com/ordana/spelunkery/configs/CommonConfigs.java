@@ -18,8 +18,6 @@ public class CommonConfigs {
     public static Supplier<Integer> DIAMOND_GRINDSTONE_DEPLETE_CHANCE;
     public static Supplier<Boolean> GRINDSTONE_DISENCHANTS_TOOLS;
     public static Supplier<Integer> PARACHUTE_DELAY;
-    public static Supplier<Boolean> ENABLE_ROUGH_GEMS;
-    public static Supplier<Boolean> ENABLE_RAW_NUGGETS;
     public static Supplier<Boolean> ORE_STONE_DROPS;
     //public static Supplier<Boolean> ENABLE_GEM_SHARDS;
 
@@ -37,11 +35,9 @@ public class CommonConfigs {
     public static Supplier<Integer> ECHO_FORK_RANGE;
     public static Supplier<Integer> ECHO_DURRATION;
     public static Supplier<Integer> ECHO_COOLDOWN;
-    public static Supplier<Boolean> SCULK_SHEARING;
     public static Supplier<Integer> MAGNET_RANGE;
     public static Supplier<Integer> MAGNETITE_RANGE;
 
-    public static Supplier<Boolean> STONE_STRIPE_FEATURES;
     public static Supplier<Boolean> ENABLE_MORES;
 
 
@@ -59,9 +55,8 @@ public class CommonConfigs {
         DIAMOND_GRINDSTONE_DEPLETE_CHANCE = builder.define("diamond_grindstone_deplete_chance", 64, 0, 128);
         GRINDSTONE_DISENCHANTS_TOOLS = builder.define("grindstone_disenchants_tools", true);
         PARACHUTE_DELAY = builder.define("parachute_opening_delay", 10, 0, 128);
+        builder.comment("Show m'ore blocks in the creative tab. World generation is always on.");
         ENABLE_MORES = builder.define("enable_mores", true);
-        ENABLE_ROUGH_GEMS = builder.define("enable_rough_gems", true);
-        ENABLE_RAW_NUGGETS = builder.define("enable_raw_nuggets", true);
         PlatHelper.getPlatform().ifFabric(() -> {
             ORE_STONE_DROPS = builder.define("ores_drop_base_stone", false);
         });
@@ -73,7 +68,6 @@ public class CommonConfigs {
         ECHO_FORK_RANGE = builder.define("echo_fork_range", 16, 1, 256);
         ECHO_COOLDOWN = builder.define("echo_fork_cooldown", 600, 1, 72000);
         ECHO_DURRATION = builder.define("echo_glow_duration", 1200, 1, 72000);
-        SCULK_SHEARING = builder.define("sculk_drops_with_shears", true);
         MAGNET_RANGE = builder.define("magnet_range", 8, 1, 32);
         MAGNETITE_RANGE = builder.define("magnetite_range", 64, 1, 512);
         builder.pop();
@@ -87,10 +81,6 @@ public class CommonConfigs {
         SLIME_GROWTH = builder.define("enable_slime_growth", true);
         SLIME_GROWTH_CHANCE = builder.define("slime_growth_chance", 10, 1, 127);
         SLIME_GROWTH_MAX = builder.define("slime_growth_max", 5, 1, 127);
-        builder.pop();
-
-        builder.push("worldgen");
-        STONE_STRIPE_FEATURES = builder.define("stone_stripe_features", true);
         builder.pop();
 
         SERVER_SPEC = builder.build();

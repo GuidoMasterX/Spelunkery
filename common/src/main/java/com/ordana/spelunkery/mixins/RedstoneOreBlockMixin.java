@@ -1,6 +1,5 @@
 package com.ordana.spelunkery.mixins;
 
-import com.ordana.spelunkery.configs.CommonConfigs;
 import com.ordana.spelunkery.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -23,6 +22,6 @@ public class RedstoneOreBlockMixin extends Block {
 
     @Inject(method = "spawnAfterBreak", at = @At("HEAD"), cancellable = true)
     private void preventOreDrops(BlockState state, ServerLevel level, BlockPos pos, ItemStack stack, boolean dropExperience, CallbackInfo ci) {
-        if (state.is(ModTags.XP_DROP_DISABLED) && CommonConfigs.ENABLE_ROUGH_GEMS.get()) ci.cancel();
+        if (state.is(ModTags.XP_DROP_DISABLED)) ci.cancel();
     }
 }

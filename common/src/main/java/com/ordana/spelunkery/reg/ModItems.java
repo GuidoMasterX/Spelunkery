@@ -9,7 +9,6 @@ import net.minecraft.util.Unit;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 
-import java.util.Objects;
 import java.util.function.Supplier;
 
 public class ModItems {
@@ -20,16 +19,6 @@ public class ModItems {
     public static <T extends Item> Supplier<T> regItem(String name, Supplier<T> itemSup) {
         return RegHelper.registerItem(Spelunkery.res(name), itemSup);
     }
-
-    private static boolean isCompatItemEanbled(String requiredMod) {
-        if(Objects.equals(requiredMod, "create")) return requiredMod.equals("create");
-        if(Objects.equals(requiredMod, "sullysmod")) return requiredMod.equals("sullysmod");
-        if(Objects.equals(requiredMod, "oreganized")) return requiredMod.equals("oreganized");
-        if(Objects.equals(requiredMod, "etcetera")) return requiredMod.equals("etcetera");
-        if(Objects.equals(requiredMod, "create_dd")) return requiredMod.equals("create_dd");
-        return PlatHelper.isModLoaded(requiredMod);
-    }
-
 
     public static final Supplier<Item> STONE_PEBBLE = regItem("stone_pebble", () ->
             new PebbleItem(new Item.Properties()));

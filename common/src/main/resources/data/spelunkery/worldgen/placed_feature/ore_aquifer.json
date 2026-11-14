@@ -2,19 +2,10 @@
   "feature": "spelunkery:ore_aquifer",
   "placement": [
     {
-      "type": "minecraft:in_square"
-    },
-    {
       "type": "minecraft:noise_based_count",
       "noise_to_count_ratio": 10,
       "noise_factor": 60,
       "noise_offset": 0
-    },
-    {
-      "type": "minecraft:noise_threshold_count",
-      "noise_level": 1,
-      "below_noise": 1,
-      "above_noise": 1
     },
     {
       "type": "minecraft:count_on_every_layer",

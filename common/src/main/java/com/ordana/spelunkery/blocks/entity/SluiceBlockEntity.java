@@ -252,7 +252,7 @@ public class SluiceBlockEntity extends RandomizableContainerBlockEntity {
                 }
             }
 
-            suckInItems(entity, lootItem);
+            if (!suckInItems(entity, lootItem)) return false;
             var random = level.random;
             itemEntity.getItem().shrink(1);
             if (lootItem.isEmpty()) return false;

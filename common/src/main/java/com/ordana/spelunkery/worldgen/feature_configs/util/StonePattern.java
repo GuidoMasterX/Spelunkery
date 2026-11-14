@@ -26,7 +26,7 @@ public class StonePattern {
                     -> stonePattern.secondaryMin),
             Codec.floatRange(-1.0F, 1.0F).fieldOf("secondary_max").orElse(0.0f).forGetter((stonePattern)
                     -> stonePattern.secondaryMax),
-            Codec.floatRange(0.0F, 1.0F).fieldOf("vertical_scale").orElse(0.0f).forGetter((stonePattern)
+            Codec.floatRange(0.001F, 1.0F).fieldOf("vertical_scale").orElse(1.0f).forGetter((stonePattern)
                     -> stonePattern.verticalScale)
     ).apply(instance, StonePattern::new));
 
@@ -50,21 +50,27 @@ public class StonePattern {
         this.noise.SetSeed(seed);
     }
 
-    public boolean shouldPlacePrimaryStone(BlockPos blockPos){
+    public float getValue(BlockPos blockPos) {
         float x = blockPos.getX();
         float y = blockPos.getY();
         float z = blockPos.getZ();
         y /= verticalScale;
-        float value = this.noise.GetNoise(x, y, z);
+        return this.noise.GetNoise(x, y, z);
+    }
+
+    public boolean shouldPlacePrimaryStone(float value) {
         return value < primaryMax && value > primaryMin;
     }
 
-    public boolean shouldPlaceSecondaryStone(BlockPos blockPos){
-        float x = blockPos.getX();
-        float y = blockPos.getY();
-        float z = blockPos.getZ();
-        y /= verticalScale;
-        float value = this.noise.GetNoise(x, y, z);
+    public boolean shouldPlaceSecondaryStone(float value) {
         return value < secondaryMax && value > secondaryMin;
+    }
+
+    public boolean shouldPlacePrimaryStone(BlockPos blockPos) {
+        return shouldPlacePrimaryStone(getValue(blockPos));
+    }
+
+    public boolean shouldPlaceSecondaryStone(BlockPos blockPos) {
+        return shouldPlaceSecondaryStone(getValue(blockPos));
     }
 }

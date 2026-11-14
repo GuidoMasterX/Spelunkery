@@ -3,9 +3,7 @@ package com.ordana.spelunkery.reg;
 import com.ordana.spelunkery.Spelunkery;
 import com.ordana.spelunkery.SpelunkeryPlatform;
 import com.ordana.spelunkery.worldgen.feature_configs.BlockStripeFeatureConfig;
-import com.ordana.spelunkery.worldgen.feature_configs.CrystalFeatureConfig;
 import com.ordana.spelunkery.worldgen.features.BlockStripeFeature;
-import com.ordana.spelunkery.worldgen.features.CrystalFeature;
 import com.ordana.spelunkery.worldgen.structures.MineshaftDustCorridor;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.core.registries.Registries;
@@ -28,10 +26,6 @@ public class ModWorldgenFeatures {
 
 
     //custom feature types
-
-    public static final Supplier<Feature<CrystalFeatureConfig>> CRYSTAL_FEATURE = RegHelper.registerFeature(
-        Spelunkery.res("crystal"), () ->
-            new CrystalFeature(CrystalFeatureConfig.CODEC));
 
     public static final Supplier<Feature<BlockStripeFeatureConfig>> BLOCK_STRIPE_FEATURE = RegHelper.registerFeature(
         Spelunkery.res("block_stripe"), () ->

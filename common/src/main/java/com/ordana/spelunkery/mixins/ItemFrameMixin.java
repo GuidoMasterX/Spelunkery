@@ -28,7 +28,10 @@ public abstract class ItemFrameMixin extends HangingEntity {
 
     @Override
     public void tick() {
-        //if (!this.level.isClientSide) {
+        if (this.level.isClientSide) {
+            super.tick();
+            return;
+        }
 
             ItemStack stack = this.getItem();
             boolean active = stack.getOrDefault(ModComponents.ACTIVE.get(), false);

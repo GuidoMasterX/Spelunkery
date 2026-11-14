@@ -3,7 +3,6 @@ package com.ordana.spelunkery.blocks;
 import com.mojang.serialization.MapCodec;
 import com.ordana.spelunkery.events.ClientBoundParticlePacket;
 import com.ordana.spelunkery.events.ClientBoundSendKnockbackPacket;
-import com.ordana.spelunkery.reg.ModBlocks;
 import net.mehvahdjukaar.moonlight.api.platform.network.NetworkHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,8 +13,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -95,13 +92,11 @@ public class SulfuricVentBlock extends DirectionalBlock {
         var sourceBlock = getSourceBlock(level, state, pos);
 
         if (level instanceof ServerLevel) {
-            Entity entity = new ItemEntity(level, 0, 0, 0, new ItemStack(ModBlocks.SULFUR.get()));
-            if (sourceBlock.getBlock() instanceof FallingBlock) entity = FallingBlockEntity.fall(level, pos.relative(facing), getSourceBlock(level, state, pos));
-
-
-            entity.moveTo(pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5);
-            if (level.random.nextBoolean()) level.setBlockAndUpdate(pos.relative(facing.getOpposite()), Blocks.AIR.defaultBlockState());
-            //entity.setDeltaMovement(new Vec3(level.random.nextIntBetweenInclusive(-1, 1), 0, level.random.nextIntBetweenInclusive(-1, 1)));
+            if (sourceBlock.getBlock() instanceof FallingBlock) {
+                Entity entity = FallingBlockEntity.fall(level, pos.relative(facing), sourceBlock);
+                entity.moveTo(pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5);
+                if (level.random.nextBoolean()) level.setBlockAndUpdate(pos.relative(facing.getOpposite()), Blocks.AIR.defaultBlockState());
+            }
         }
 
         AABB area = new AABB(pos.relative(facing));
@@ -123,6 +118,12 @@ public class SulfuricVentBlock extends DirectionalBlock {
                 double y = e.getY() - pos.getCenter().y;
                 double z = e.getZ() - pos.getCenter().z;
                 double aa = Math.sqrt(x * x + y * y + z * z);
+                if (aa < 1.0E-4D) {
+                    x = facing.getStepX();
+                    y = facing.getStepY();
+                    z = facing.getStepZ();
+                    aa = 1.0D;
+                }
                 x /= aa;
                 y /= aa;
                 z /= aa;

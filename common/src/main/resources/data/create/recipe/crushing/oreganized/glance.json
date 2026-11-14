@@ -34,9 +34,9 @@
       "chance": 0.8
     },
     {
-      "item": "spelunkery:raw_lead_nugget",
-      "id": 0.8
+      "id": "spelunkery:raw_lead_nugget",
+      "chance": 0.8
     }
   ],
-  "processingTime": 250
+  "processing_time": 250
 }

@@ -132,13 +132,18 @@ public class CarvedNephriteBlockEntity extends BlockEntity {
             selfTile.setTickCounter(0);
         }
 
-        if (selfTile.getCharge() == 0) level.setBlockAndUpdate(pos, state.setValue(CarvedNephriteBlock.CHARGE, CarvedNephriteBlock.ChargeState.EMPTY));
-        else if (selfTile.getCharge() > 0 && selfTile.getCharge() <= 20) level.setBlockAndUpdate(pos, state.setValue(CarvedNephriteBlock.CHARGE, CarvedNephriteBlock.ChargeState.ONE_TO_TWENTY));
-        else if (selfTile.getCharge() > 20 && selfTile.getCharge() <= 40) level.setBlockAndUpdate(pos, state.setValue(CarvedNephriteBlock.CHARGE, CarvedNephriteBlock.ChargeState.TWENTYONE_TO_FOURTY));
-        else if (selfTile.getCharge() > 40 && selfTile.getCharge() <= 60) level.setBlockAndUpdate(pos, state.setValue(CarvedNephriteBlock.CHARGE, CarvedNephriteBlock.ChargeState.FOURTYONE_TO_SIXTY));
-        else if (selfTile.getCharge() > 60 && selfTile.getCharge() <= 80) level.setBlockAndUpdate(pos, state.setValue(CarvedNephriteBlock.CHARGE, CarvedNephriteBlock.ChargeState.SIXTYONE_TO_EIGHTY));
-        else if (selfTile.getCharge() > 80 && selfTile.getCharge() <= 99) level.setBlockAndUpdate(pos, state.setValue(CarvedNephriteBlock.CHARGE, CarvedNephriteBlock.ChargeState.EIGHTYONE_TO_NINETYNINE));
-        else if (selfTile.getCharge() == 100) level.setBlockAndUpdate(pos, state.setValue(CarvedNephriteBlock.CHARGE, CarvedNephriteBlock.ChargeState.FULL));
+        int charge = selfTile.getCharge();
+        CarvedNephriteBlock.ChargeState target;
+        if (charge == 0) target = CarvedNephriteBlock.ChargeState.EMPTY;
+        else if (charge <= 20) target = CarvedNephriteBlock.ChargeState.ONE_TO_TWENTY;
+        else if (charge <= 40) target = CarvedNephriteBlock.ChargeState.TWENTYONE_TO_FOURTY;
+        else if (charge <= 60) target = CarvedNephriteBlock.ChargeState.FOURTYONE_TO_SIXTY;
+        else if (charge <= 80) target = CarvedNephriteBlock.ChargeState.SIXTYONE_TO_EIGHTY;
+        else if (charge <= 99) target = CarvedNephriteBlock.ChargeState.EIGHTYONE_TO_NINETYNINE;
+        else target = CarvedNephriteBlock.ChargeState.FULL;
 
+        if (state.getValue(CarvedNephriteBlock.CHARGE) != target) {
+            level.setBlockAndUpdate(pos, state.setValue(CarvedNephriteBlock.CHARGE, target));
+        }
     }
 }

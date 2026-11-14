@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_carvers",
+  "biomes": "#spelunkery:has_stone_noise",
+  "carvers": [
+    "spelunkery:crevice"
+  ],
+  "step": "air"
+}

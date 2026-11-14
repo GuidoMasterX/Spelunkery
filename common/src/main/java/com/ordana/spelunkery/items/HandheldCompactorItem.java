@@ -100,6 +100,7 @@ public class HandheldCompactorItem extends Item {
 
     @Override
     public void inventoryTick(@NotNull ItemStack stack, @NotNull Level level, Entity entity, int slotId, boolean isSelected) {
+        if (level.isClientSide()) return;
         var mode = getMode(stack);
 
         if (entity.isSpectator() || mode == CompressionMode.DISABLED || !(entity instanceof Player player)) {

@@ -114,27 +114,24 @@ public class MagneticCompassItem extends Item {
         return Level.RESOURCE_KEY_CODEC.parse(NbtOps.INSTANCE, compoundTag.get("magnetiteDimension")).result();
     }
 
-    private int tickCounter = 0;
-    public int setTickCounter(int tick) {
-        return tickCounter = tick;
-    }
-
     @Override
     public void inventoryTick(@NotNull ItemStack stack, Level level, @NotNull Entity entity, int slotId, boolean isSelected) {
         if (!level.isClientSide()) {
             if (entity instanceof ServerPlayer player){
-                this.setPlayerX(stack, player.getBlockX());
-                this.setPlayerZ(stack, player.getBlockZ());
-
+                int x = player.getBlockX();
+                int z = player.getBlockZ();
+                if (getPlayerX(stack) != x) this.setPlayerX(stack, x);
+                if (getPlayerZ(stack) != z) this.setPlayerZ(stack, z);
             }
 
-            tickCounter++;
-            if (tickCounter == 100) {
-                if (!stack.has(ModComponents.MAGNETITE_POS.get())) level.gameEvent(entity, ModGameEvents.COMPASS_PING_EVENT, entity.blockPosition());
-                setTickCounter(0);
+            long gameTime = level.getGameTime();
+            long lastPing = stack.getOrDefault(ModComponents.LAST_PING.get(), 0L);
+            if (gameTime - lastPing >= 100) {
+                if (!stack.has(ModComponents.MAGNETITE_POS.get())) {
+                    level.gameEvent(entity, ModGameEvents.COMPASS_PING_EVENT, entity.blockPosition());
+                }
+                stack.set(ModComponents.LAST_PING.get(), gameTime);
             }
-
-
 
             if (stack.has(ModComponents.MAGNETITE_POS.get())) {
                 var component = stack.get(ModComponents.MAGNETITE_POS.get());

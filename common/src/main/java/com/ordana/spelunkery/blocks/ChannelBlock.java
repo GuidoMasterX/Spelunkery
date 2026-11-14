@@ -142,7 +142,7 @@ public class ChannelBlock extends Block {
 
         boolean bl = shouldHaveLegs(level, pos);
         if (checkNeighborsForChannel(pos, level, Direction.NORTH) || checkNeighborsForChannel(pos, level, Direction.WEST)) bl = false;
-        state.setValue(SUPPORTED, bl);
+        state = state.setValue(SUPPORTED, bl);
         return neighborState.getBlock() instanceof ChannelBlock && direction != Direction.UP && direction != Direction.DOWN ? state.setValue(PROPERTY_BY_DIRECTION.get(direction), false) : super.updateShape(state, direction, neighborState, level, pos, neighborPos);
     }
 

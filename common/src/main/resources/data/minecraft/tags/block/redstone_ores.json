@@ -16,6 +16,10 @@
     {
       "id": "spelunkery:tuff_redstone_ore",
       "required": false
+    },
+    {
+      "id": "spelunkery:calcite_redstone_ore",
+      "required": false
     }
   ]
 }

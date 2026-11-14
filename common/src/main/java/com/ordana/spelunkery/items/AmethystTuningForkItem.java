@@ -84,6 +84,7 @@ public class AmethystTuningForkItem extends Item implements IFirstPersonAnimatio
             }
             tolling = false;
         } else if (!hasTag) {
+            tolling = true;
             level.gameEvent(player, ModGameEvents.FORK_TONE_EVENT, player.blockPosition());
             player.getCooldowns().addCooldown(this, 20);
         }
@@ -126,6 +127,13 @@ public class AmethystTuningForkItem extends Item implements IFirstPersonAnimatio
     }
      */
 
+
+    @Override
+    public void inventoryTick(@NotNull ItemStack stack, Level level, @NotNull Entity entity, int slotId, boolean isSelected) {
+        if (tolling && entity instanceof Player player && !player.getCooldowns().isOnCooldown(this)) {
+            tolling = false;
+        }
+    }
 
     public int getTollRange() {
         return CommonConfigs.TUNING_FORK_RANGE.get();
@@ -262,7 +270,9 @@ public class AmethystTuningForkItem extends Item implements IFirstPersonAnimatio
         if (tolling && entity.getUsedItemHand() == hand && entity.level() instanceof ClientLevel level) {
 
             //budding amethyst block pos
-            BlockPos blockPos = stack.get(ModComponents.AMETHYST_POS.get()).pos();
+            var amethystPos = stack.get(ModComponents.AMETHYST_POS.get());
+            if (amethystPos == null) return;
+            BlockPos blockPos = amethystPos.pos();
 
             //time
             var time = level.getGameTime();

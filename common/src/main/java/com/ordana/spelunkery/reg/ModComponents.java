@@ -47,6 +47,9 @@ public class ModComponents {
     public static final Supplier<DataComponentType<Integer>> DEPTH = regComponent("depth", ()->
             DataComponentType.<Integer>builder().persistent(ExtraCodecs.intRange(Integer.MIN_VALUE, Integer.MAX_VALUE)).networkSynchronized(ByteBufCodecs.INT).build());
 
+    public static final Supplier<DataComponentType<Long>> LAST_PING = regComponent("last_ping", ()->
+            DataComponentType.<Long>builder().persistent(Codec.LONG).networkSynchronized(ByteBufCodecs.VAR_LONG).build());
+
     public static final Supplier<DataComponentType<Integer>> DEPLETION = regComponent("depletion", ()->
             DataComponentType.<Integer>builder().persistent(ExtraCodecs.intRange(Integer.MIN_VALUE, Integer.MAX_VALUE)).networkSynchronized(ByteBufCodecs.INT).build());
 

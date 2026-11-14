@@ -1,7 +1,6 @@
 package com.ordana.spelunkery.worldgen.features;
 
 import com.mojang.serialization.Codec;
-import com.ordana.spelunkery.configs.CommonConfigs;
 import com.ordana.spelunkery.worldgen.feature_configs.BlockStripeFeatureConfig;
 import com.ordana.spelunkery.worldgen.feature_configs.util.FastNoiseLite;
 import com.ordana.spelunkery.worldgen.feature_configs.util.StoneEntry;
@@ -23,46 +22,42 @@ import java.util.Random;
 
 public class BlockStripeFeature extends Feature<BlockStripeFeatureConfig> {
 
+    private final FastNoiseLite cellNoise;
+    private final FastNoiseLite cellBufferNoise;
+    private final FastNoiseLite noise;
+
     public BlockStripeFeature(Codec<BlockStripeFeatureConfig> codec) {
         super(codec);
+        this.cellNoise = createCellNoise(FastNoiseLite.CellularReturnType.CellValue);
+        this.cellBufferNoise = createCellNoise(FastNoiseLite.CellularReturnType.Distance2Div);
+        this.noise = new FastNoiseLite();
+        this.noise.SetDomainWarpType(FastNoiseLite.DomainWarpType.OpenSimplex2);
+        this.noise.SetRotationType3D(FastNoiseLite.RotationType3D.ImproveXZPlanes);
+        this.noise.SetFrequency(0.03F);
+        this.noise.SetDomainWarpAmp(1.5F);
+        this.noise.SetFractalOctaves(1);
+    }
+
+    private static FastNoiseLite createCellNoise(FastNoiseLite.CellularReturnType returnType) {
+        FastNoiseLite noise = new FastNoiseLite();
+        noise.SetNoiseType(FastNoiseLite.NoiseType.Cellular);
+        noise.SetCellularReturnType(returnType);
+        noise.SetDomainWarpType(FastNoiseLite.DomainWarpType.OpenSimplex2);
+        noise.SetRotationType3D(FastNoiseLite.RotationType3D.ImproveXZPlanes);
+        noise.SetFrequency(0.01F);
+        noise.SetFractalOctaves(1);
+        return noise;
     }
 
     @Override
     public boolean place(FeaturePlaceContext<BlockStripeFeatureConfig> context) {
-        if (!CommonConfigs.STONE_STRIPE_FEATURES.get()) return false;
-
-
         BlockStripeFeatureConfig config = context.config();
         BlockPos originPos = context.origin();
         WorldGenLevel worldGenLevel = context.level();
         ChunkGenerator chunkGenerator = context.chunkGenerator();
         ChunkAccess cachedChunk = worldGenLevel.getChunk(originPos);
-        FastNoiseLite cellNoise = new FastNoiseLite();
-
-        cellNoise.SetNoiseType(FastNoiseLite.NoiseType.Cellular);
-        cellNoise.SetCellularReturnType(FastNoiseLite.CellularReturnType.CellValue);
-        cellNoise.SetDomainWarpType(FastNoiseLite.DomainWarpType.OpenSimplex2);
-        cellNoise.SetRotationType3D(FastNoiseLite.RotationType3D.ImproveXZPlanes);
-        cellNoise.SetFrequency(0.01F);
-        cellNoise.SetFractalOctaves(1);
-
-        FastNoiseLite cellBufferNoise = new FastNoiseLite();
-        cellBufferNoise.SetNoiseType(FastNoiseLite.NoiseType.Cellular);
-        cellBufferNoise.SetCellularReturnType(FastNoiseLite.CellularReturnType.Distance2Div);
-        cellBufferNoise.SetDomainWarpType(FastNoiseLite.DomainWarpType.OpenSimplex2);
-        cellBufferNoise.SetRotationType3D(FastNoiseLite.RotationType3D.ImproveXZPlanes);
-        cellBufferNoise.SetFrequency(0.01F);
-        cellBufferNoise.SetFractalOctaves(1);
-
-        FastNoiseLite noise = new FastNoiseLite();
-        noise.SetDomainWarpType(FastNoiseLite.DomainWarpType.OpenSimplex2);
-        noise.SetRotationType3D(FastNoiseLite.RotationType3D.ImproveXZPlanes);
-        noise.SetFrequency(0.03F);
-        noise.SetDomainWarpAmp(1.5F);
-
         FastNoiseLite.Vector3 domainWarpedVector = new FastNoiseLite.Vector3(0, 0, 0);
-
-        noise.SetFractalOctaves(1);
+        boolean placed = false;
         var getX = (originPos.getX() & ~15);
         var getZ = (originPos.getZ() & ~15);
 
@@ -115,11 +110,14 @@ public class BlockStripeFeature extends Feature<BlockStripeFeatureConfig> {
                             if (patternList != null) {
                                 StoneEntry stoneEntry = patternList.get(stoneIndex);
                                 StonePattern stonePattern = stoneEntry.getStonePattern();
+                                float patternValue = stonePattern.getValue(currentPos);
 
-                                if (stonePattern.shouldPlacePrimaryStone(currentPos)) {
+                                if (stonePattern.shouldPlacePrimaryStone(patternValue)) {
                                     worldGenLevel.setBlock(currentPos, stoneEntry.getPrimaryStoneState(worldGenLevel, currentPos), Block.UPDATE_CLIENTS);
-                                } else if (stonePattern.shouldPlaceSecondaryStone(currentPos)) {
+                                    placed = true;
+                                } else if (stonePattern.shouldPlaceSecondaryStone(patternValue)) {
                                     worldGenLevel.setBlock(currentPos, stoneEntry.getSecondaryStoneState(worldGenLevel, currentPos), Block.UPDATE_CLIENTS);
+                                    placed = true;
                                 }
                             }
                         }
@@ -127,6 +125,6 @@ public class BlockStripeFeature extends Feature<BlockStripeFeatureConfig> {
                 }
             }
         }
-        return false;
+        return placed;
     }
 }

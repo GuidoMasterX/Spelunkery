@@ -22,13 +22,14 @@ public class RawNephriteBlock extends HugeMushroomBlock {
 
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos neighborPos, boolean isMoving) {
         for (Direction dir : Direction.values()) {
-            this.updateShape(state, dir, level.getBlockState(neighborPos), level, pos, neighborPos);
+            BlockPos relative = pos.relative(dir);
+            this.updateShape(state, dir, level.getBlockState(relative), level, pos, relative);
         }
     }
 
     @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
-        return neighborState.isFaceSturdy(level, neighborPos, direction) ? state.setValue(PROPERTY_BY_DIRECTION.get(direction), false) : super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+        return neighborState.isFaceSturdy(level, neighborPos, direction.getOpposite()) ? state.setValue(PROPERTY_BY_DIRECTION.get(direction), false) : super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     static {

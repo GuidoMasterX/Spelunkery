@@ -18,8 +18,8 @@ public record ClientBoundSendKnockbackPacket(Vec3 knockback, int id) implements 
 
     @Override
     public void write(RegistryFriendlyByteBuf registryFriendlyByteBuf) {
-        registryFriendlyByteBuf.writeVarInt(this.id);
         registryFriendlyByteBuf.writeVec3(this.knockback);
+        registryFriendlyByteBuf.writeVarInt(this.id);
     }
 
     @Override

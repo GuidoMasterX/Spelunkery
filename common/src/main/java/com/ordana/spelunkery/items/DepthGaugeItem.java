@@ -33,8 +33,8 @@ public class DepthGaugeItem extends Item {
 
         if (!levelIn.isClientSide()){
             if (entityIn instanceof ServerPlayer player){
-                this.setYLevel(stack, player.getBlockY());
-
+                int y = player.getBlockY();
+                if (this.getYLevel(stack) != y) this.setYLevel(stack, y);
             }
         }
     }

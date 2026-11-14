@@ -118,6 +118,7 @@ public abstract class SlimeMixin extends Mob {
                                 .withOptionalParameter(LootContextParams.THIS_ENTITY, player);
 
                         var l = lootTable.getRandomItems(builder.create(LootContextParamSets.GIFT));
+                        if (l.isEmpty()) continue;
 
                         ItemEntity itemEntity = this.spawnAtLocation(l.iterator().next());
                         if (itemEntity != null)
