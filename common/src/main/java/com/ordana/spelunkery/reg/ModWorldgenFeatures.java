@@ -46,6 +46,9 @@ public class ModWorldgenFeatures {
         ResourceKey<PlacedFeature> noise_lush = ResourceKey.create(Registries.PLACED_FEATURE, Spelunkery.res("noise_lush"));
         SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.RAW_GENERATION, ModTags.HAS_LUSH_NOISE, noise_lush);
 
+        ResourceKey<PlacedFeature> tangle_roots_blob = ResourceKey.create(Registries.PLACED_FEATURE, Spelunkery.res("tangle_roots_blob"));
+        SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.RAW_GENERATION, ModTags.HAS_LUSH_NOISE, tangle_roots_blob);
+
         ResourceKey<PlacedFeature> noise_dirt = ResourceKey.create(Registries.PLACED_FEATURE, Spelunkery.res("noise_dirt"));
         SpelunkeryPlatform.addFeatureToBiome(GenerationStep.Decoration.RAW_GENERATION, ModTags.HAS_DIRT_NOISE, noise_dirt);
 

@@ -2,9 +2,7 @@ package com.ordana.spelunkery.blocks.nephrite;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,13 +16,6 @@ public class RawNephriteBlock extends HugeMushroomBlock {
 
     public RawNephriteBlock(Properties properties) {
         super(properties);
-    }
-
-    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos neighborPos, boolean isMoving) {
-        for (Direction dir : Direction.values()) {
-            BlockPos relative = pos.relative(dir);
-            this.updateShape(state, dir, level.getBlockState(relative), level, pos, relative);
-        }
     }
 
     @Override

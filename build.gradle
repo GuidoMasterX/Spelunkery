@@ -115,8 +115,14 @@ tasks.register("validateSpelunkeryData") {
         assert file("${neoforgeResources}/data/spelunkery/neoforge/biome_modifier/crevice_carver.json").exists(), "Crevice carver modifier is missing"
 
         fileTree("${resources}/data/create/recipe").matching { include "**/*.json" }.each { recipe ->
-            assert !recipe.text.contains("processingTime"), "Create recipe uses stale processingTime: ${recipe}"
-            assert !recipe.text.contains('"id": 0.8'), "Create recipe has an invalid numeric id: ${recipe}"
+            def json = new groovy.json.JsonSlurper().parse(recipe)
+            if (json.type == "create:crushing") {
+                assert json.processing_time != null, "Create crushing recipe is missing processing_time: ${recipe}"
+            }
+            assert json.results != null, "Create recipe has no results: ${recipe}"
+            json.results.each { result ->
+                assert result.id instanceof String, "Create recipe result is missing a string id: ${recipe}"
+            }
         }
 
         ["andesite", "diorite", "granite", "tuff"].each { name ->
