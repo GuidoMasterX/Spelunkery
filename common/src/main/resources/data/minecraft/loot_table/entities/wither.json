@@ -29,6 +29,29 @@
           }
         }
       ]
+    },
+    {
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:nether_star"
+        }
+      ],
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "condition": "minecraft:damage_source_properties",
+            "predicate": {
+              "direct_entity": {
+                "type": "spelunkery:eggplant"
+              }
+            }
+          }
+        }
+      ]
     }
   ],
   "random_sequence": "minecraft:entities/wither"
